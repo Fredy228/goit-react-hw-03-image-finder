@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const BarBlock = styled.div`
+export const BarBlock = styled.header`
     top: 0;
     left: 0;
     position: sticky;
@@ -46,6 +46,18 @@ export const SearchFormButton = styled.button`
     :hover {
         opacity: 1;
     }
+`;
+
+export const SearchFormButtonLabel = styled.span`
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+    border: 0;
 `;
 
 export const SearchFormInput = styled.input`

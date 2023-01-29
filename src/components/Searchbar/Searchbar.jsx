@@ -1,5 +1,5 @@
 import React from "react";
-import { BarBlock, SearchForm, SearchFormButton, SearchFormInput } from "./Searchbar.styled";
+import { BarBlock, SearchForm, SearchFormButton, SearchFormInput, SearchFormButtonLabel } from "./Searchbar.styled";
 
 class Searchbar extends React.Component {
     state = {
@@ -25,8 +25,15 @@ class Searchbar extends React.Component {
         return (
             <BarBlock>
                 <SearchForm onSubmit={this.submitForm}>
-                    <SearchFormButton type="submit"></SearchFormButton>
-                    <SearchFormInput onChange={this.handleChange} placeholder={'Search images and photos'}/>
+                    <SearchFormButton type="submit">
+                        <SearchFormButtonLabel>Search</SearchFormButtonLabel>
+                    </SearchFormButton>
+                    <SearchFormInput 
+                    onChange={this.handleChange} 
+                    placeholder={'Search images and photos'}
+                    type="text"
+                    autocomplete="off"
+                    autoFocus/>
                 </SearchForm>
             </BarBlock>
         )
