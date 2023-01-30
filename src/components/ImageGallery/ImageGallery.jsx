@@ -16,15 +16,15 @@ class ImageGallery extends React.Component {
         try {
             if(querySearch !== prevProps.querySearch) {
                 changeStatus('pending');
-                const resalt = await hitsPushArr([]);
-                this.setState({hits: resalt});
+                const resaltNew = await hitsPushArr([]);
+                this.setState({hits: resaltNew});
                 changeStatus('resolved');
             }
 
-            if(pageSearch !== prevProps.pageSearch) {
+            if(pageSearch > prevProps.pageSearch) {
                 changeStatus('pending');
-                const resalt = await hitsPushArr(hits);
-                this.setState({hits: resalt});
+                const resaltMore = await hitsPushArr(hits);
+                this.setState({hits: resaltMore});
                 changeStatus('resolved');
             }
         } catch (error) {

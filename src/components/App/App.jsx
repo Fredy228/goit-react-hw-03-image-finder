@@ -55,7 +55,7 @@ class App extends React.Component {
         {status === 'pending' && <ColorRing
           visible={true}
           height="80"
-          width="80"
+          width="100hv"
           ariaLabel="blocks-loading"
           wrapperStyle={{}}
           wrapperClass="blocks-wrapper"
