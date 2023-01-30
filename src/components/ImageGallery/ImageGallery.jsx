@@ -1,30 +1,42 @@
 import React from "react";
 import {ImageGalleryList} from './ImageGallery.styled';
-import {getImgagesAPI} from '../PixabayAPI/PixabayAPI';
+import {getImgagesAPI} from 'components/PixabayAPI/PixabayAPI';
+import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem";
 
 class ImageGallery extends React.Component {
     state = {
         hits: [],
     }
+    
 
     async componentDidUpdate(prevProps) {
-        const {querySearch, pageSearch} = this.props;
+        const {querySearch, pageSearch, changeStatus, toggleButton} = this.props;
         const {hits} = this.state;
 
-        if(querySearch !== prevProps.querySearch) {
-            const resalt = await hitsPushArr([]);
-            this.setState({hits: resalt});
-        }
+        try {
+            if(querySearch !== prevProps.querySearch) {
+                changeStatus('pending');
+                const resalt = await hitsPushArr([]);
+                this.setState({hits: resalt});
+                changeStatus('resolved');
+            }
 
-        if(pageSearch !== prevProps.pageSearch) {
-            const resalt = await hitsPushArr(hits);
-            this.setState({hits: resalt});
+            if(pageSearch !== prevProps.pageSearch) {
+                changeStatus('pending');
+                const resalt = await hitsPushArr(hits);
+                this.setState({hits: resalt});
+                changeStatus('resolved');
+            }
+        } catch (error) {
+            changeStatus('rejected')
+            console.log(error)
         }
 
         async function hitsPushArr(parametrHits) {
             const response = await getImgagesAPI(querySearch, pageSearch);
+            toggleButton(response.totalHits);
             let hitArray = [...parametrHits];
-                response.map(({id, webformatURL, largeImageURL}) => {
+                response.hits.map(({id, webformatURL, largeImageURL}) => {
                  return hitArray.push({
                      id,
                      webformatURL,
@@ -36,11 +48,19 @@ class ImageGallery extends React.Component {
     }
 
     render() {
-        return(
-            <ImageGalleryList>
+        const {querySearch} = this.props;
+        const {hits} = this.state
 
-            </ImageGalleryList>
-        )
+        if(hits.length !== 0) {
+            return (
+                <ImageGalleryList>
+                    {this.state.hits.map((item) => {
+                        return <ImageGalleryItem key={item.id} imgData={item} name={querySearch}/>
+                    })}
+                </ImageGalleryList>
+            )
+        }
+
     }
 }
 

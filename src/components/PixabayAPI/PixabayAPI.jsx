@@ -5,5 +5,5 @@ const URL_BASE = 'https://pixabay.com/api/';
 
 export const getImgagesAPI = async (querySearch, page) => {
   const response = await axios.get(`${URL_BASE}?q=${querySearch}&page=${page}&key=${KEY_API_PIXABAY}&image_type=photo&orientation=horizontal&per_page=12`);
-    return response.data.hits;
+    return response.data;
 }
