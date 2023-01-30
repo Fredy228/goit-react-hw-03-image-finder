@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import {ImageGalleryList} from './ImageGallery.styled';
 import {getImgagesAPI} from 'components/PixabayAPI/PixabayAPI';
 import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem";
@@ -67,6 +68,13 @@ class ImageGallery extends React.Component {
         }
 
     }
+}
+
+ImageGallery.propTypes = {
+    querySearch: PropTypes.string.isRequired,
+    pageSearch: PropTypes.number.isRequired,
+    changeStatus: PropTypes.func.isRequired,
+    toggleButton: PropTypes.func.isRequired
 }
 
 export default ImageGallery

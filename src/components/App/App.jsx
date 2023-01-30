@@ -1,10 +1,10 @@
 import React from "react";
-import { ColorRing } from  'react-loader-spinner'
 import { Container } from "./App.styled";
 import Searchbar from 'components/Searchbar/Searchbar';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import { Button } from "components/Button/Button";
 import Modal from "components/Modal/Modal";
+import { Loader } from "components/Loader/Loader";
 
 class App extends React.Component {
   state = {
@@ -56,21 +56,13 @@ class App extends React.Component {
         <Searchbar onSubmitForm={this.hendleSearchQuery}/>
 
         <ImageGallery 
-        querySearch={query} 
+        querySearch={String(query)} 
         pageSearch={page}
         changeStatus={this.changeStatus}
         toggleButton={this.toggleButton}
         toggleModal={this.toggleModal}/>
 
-        {status === 'pending' && <ColorRing
-          visible={true}
-          height="80"
-          width="100%"
-          ariaLabel="blocks-loading"
-          wrapperStyle={{}}
-          wrapperClass="blocks-wrapper"
-          colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-        />}
+        {status === 'pending' && <Loader/>}
 
         {isShowModal && <Modal url={largeImg} toggleModal={this.toggleModal}/>}
 

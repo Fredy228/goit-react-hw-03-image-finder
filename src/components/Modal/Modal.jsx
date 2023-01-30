@@ -1,5 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
+import PropTypes from 'prop-types';
 import { Overlay, ModalWindow, ImageLarge } from "./Modal.styled";
 
 const modalRoot = document.querySelector('#modal-root')
@@ -38,6 +39,11 @@ class Modal extends React.Component {
             )
         )
     }
+}
+
+Modal.propTypes = {
+    toggleModal: PropTypes.func.isRequired,
+    url: PropTypes.string.isRequired,
 }
 
 export default Modal;
