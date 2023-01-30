@@ -15,7 +15,7 @@ class App extends React.Component {
     isShowModal: false,
     largeImg: ''
   }
-   // 'idle'
+    // 'idle'
     // 'pending'
     // 'resolved'
     // 'rejected'

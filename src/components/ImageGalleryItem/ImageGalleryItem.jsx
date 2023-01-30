@@ -1,4 +1,4 @@
-import { Item, Image, ImageLarge } from "./ImageGalleryItem.styled";
+import { Item, Image } from "./ImageGalleryItem.styled";
 
 export const ImageGalleryItem = ({imgData, name, toggleModal}) => {
     return(
