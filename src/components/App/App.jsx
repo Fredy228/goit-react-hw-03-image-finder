@@ -4,13 +4,16 @@ import { Container } from "./App.styled";
 import Searchbar from 'components/Searchbar/Searchbar';
 import ImageGallery from 'components/ImageGallery/ImageGallery';
 import { Button } from "components/Button/Button";
+import Modal from "components/Modal/Modal";
 
 class App extends React.Component {
   state = {
     query: '',
     page: 1,
     status: 'idle',
-    isShowButton: false
+    isShowButton: false,
+    isShowModal: false,
+    largeImg: ''
   }
    // 'idle'
     // 'pending'
@@ -39,8 +42,14 @@ class App extends React.Component {
     }
   }
 
+  toggleModal = (url) => {
+    this.setState(({isShowModal}) => ({isShowModal: !isShowModal, largeImg: url}));
+  }
+
+
+
   render () {
-    const {query, page, status, isShowButton} = this.state;
+    const {query, page, status, isShowButton, isShowModal, largeImg} = this.state;
    
     return (
       <Container>
@@ -50,17 +59,20 @@ class App extends React.Component {
         querySearch={query} 
         pageSearch={page}
         changeStatus={this.changeStatus}
-        toggleButton={this.toggleButton}/>
+        toggleButton={this.toggleButton}
+        toggleModal={this.toggleModal}/>
 
         {status === 'pending' && <ColorRing
           visible={true}
           height="80"
-          width="100hv"
+          width="100%"
           ariaLabel="blocks-loading"
           wrapperStyle={{}}
           wrapperClass="blocks-wrapper"
           colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
         />}
+
+        {isShowModal && <Modal url={largeImg} toggleModal={this.toggleModal}/>}
 
         {isShowButton && <Button onLoadMore={this.changePage}/>}
       </Container>

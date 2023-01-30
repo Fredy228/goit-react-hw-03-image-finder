@@ -6,8 +6,8 @@ import { ImageGalleryItem } from "components/ImageGalleryItem/ImageGalleryItem";
 class ImageGallery extends React.Component {
     state = {
         hits: [],
+        isShowModal: false,
     }
-    
 
     async componentDidUpdate(prevProps) {
         const {querySearch, pageSearch, changeStatus, toggleButton} = this.props;
@@ -48,14 +48,19 @@ class ImageGallery extends React.Component {
     }
 
     render() {
-        const {querySearch} = this.props;
+        const {querySearch, toggleModal} = this.props;
         const {hits} = this.state
 
         if(hits.length !== 0) {
             return (
+                
                 <ImageGalleryList>
                     {this.state.hits.map((item) => {
-                        return <ImageGalleryItem key={item.id} imgData={item} name={querySearch}/>
+                        return <ImageGalleryItem 
+                        key={item.id} 
+                        imgData={item} 
+                        name={querySearch}
+                        toggleModal={toggleModal}/>
                     })}
                 </ImageGalleryList>
             )
